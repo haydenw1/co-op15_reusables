@@ -1,0 +1,54 @@
+.help-text {
+  background: rgba(255, 255, 255, .9);
+  bottom: 0;
+  height: 0%;
+  overflow-y: scroll;
+  position: fixed;
+  transition: height 1s;
+  width: 100%;
+}
+
+.help-close {
+    height: 60px;
+    font-size: 300%;
+    position: fixed;
+    margin: 0px 10px 0px 0px;
+    right: 0px;
+    text-align: center;
+    width: 60px;
+
+    &:active {
+      color: rgba(100, 100, 100, 0.7);
+    }
+}
+
+.help-description {
+  font-size: 1.1em;
+  padding: 0% 5%;
+  margin: 0px;
+
+  ol {
+    float: left;
+  }
+
+  li {
+    margin-bottom: 15px;
+        //float: left;
+    width: 100%;
+    //clear: left;
+  }
+
+  img {
+    width: 50%;
+    margin: 0 auto;
+    //clear: right;
+    //float: right;
+    display: block;
+    margin-bottom: 25px;
+  }
+}
+
+.help-title {
+  padding-left: 15px;
+  margin: 15px 0px 5px 0px;
+}

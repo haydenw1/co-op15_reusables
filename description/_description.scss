@@ -2,7 +2,7 @@ $top-background-color:rgba(255, 255, 255, .9);
 $description-top-font: "Avenir-Black", sans-serif;
 $directions-text-color: #333;
 
-.top {
+.description-holder {
   background: $top-background-color;
   left: 0;
   padding: 10px 15px;
@@ -11,8 +11,9 @@ $directions-text-color: #333;
   top: 0;
   transition: height 1s;
   z-index: 1;
+  overflow: hidden;
 
-  .directions {
+  .text {
     color: $directions-text-color;
     font-size: 1.4em;
     line-height: 1.25;
@@ -21,36 +22,51 @@ $directions-text-color: #333;
     pointer-events: none;
     text-align: justify;
     text-indent: 1em;
-    transition: opacity .5s;
+    transition: opacity .3s;
   }
 
   .title {
     font-family: $description-top-font;
     font-size: 2em;
     margin: 5px 0px;
-    transition: font-size .25s;
+    transition: font-size .3s;
   }
 }
 
 .hidden {
 
-  &.button.description {
-    bottom: 93%;
-    height: 25px;
-    left: 81%;
-    transition: bottom 1s, left .25s, height 1s, width 1s;
-    width: 25px;
-  }
+  //&.button.description {
+  //  bottom: 93%;
+  //  height: 25px;
+  //  left: 81%;
+  //  transition: bottom 1s, left .25s, height 1s, width 1s;
+  //  width: 25px;
+  //}
 
-  &.top {
+  &.description-holder {
+
+    .text {
+      //opacity: 0;
+    }
 
     .title {
       font-family: "Avenir-Roman", sans-serif;
       font-size: 1.3em;
     }
+  }
+}
 
-    .directions {
-      opacity: 0;
-    }
+.description-close {
+  bottom: 0px;
+  font-size: 300%;
+  height: 60px;
+  position: absolute;
+  margin: 0px 10px 0px 0px;
+  right: 0px;
+  text-align: center;
+  width: 60px;
+
+  &:active {
+    color: rgba(100, 100, 100, 0.7);
   }
 }
