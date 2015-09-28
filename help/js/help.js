@@ -36,7 +36,7 @@ var help = {
 
       help.vis = vis;
 
-
+      help.meas.width = document.documentElement.clientWidth; //stores document width
       help.meas.height = document.documentElement.clientHeight;  //stores document height
 
       help.addElements();
@@ -45,6 +45,7 @@ var help = {
       //help.elem.helpDiv = "red";
       help.elem.button = document.getElementsByClassName("button help")[0];  //store hide/show button reference
 
+      help.styleWidth();
       help.fillText();
 
 
@@ -107,22 +108,31 @@ var help = {
 
 
   /**
-   * checkInteraction
-   *   called after a delay when the document is ready, checks the help.interaction
-   *   property to see if the user has interacted with the help yet. If they
-   *   HAVE interacted then this function does nothing, if they HAVE NOT interacted
-   *   then this function calls 'help.hide()'
+   * styleWidth
+   *
    */
 
-  /*
 
-  checkInteraction: function(){
-    if(!help.interaction){  //if user has not interacted with help
-      help.hide();  //hide the help
+
+  styleWidth: function() {
+    var button = help.elem.button;
+    var width = help.meas.width;
+
+    //addresses minor sizing issues...easier than doing in css and worrying about pixel ratios
+    if (width < 330) {
+      return;
+    }else if (width < 370) {
+      button.style.fontSize = "2.65em";
+      button.style.lineHeight = 1.1;
+    } else if (width < 400) {
+      button.style.lineHeight = 1.2;
+    } else if (width < 450) {
+      button.style.fontSize = "2.85em";
+      button.style.lineHeight = 1.1;
     }
   },
 
-  */
+
 
 
   /**

@@ -41,7 +41,7 @@ var description = {
   setUp: function(){
     $( document ).ready(function(){  //jquery, makes sure the document is ready.
 
-      description.meas.height = document.documentElement.clientHeight;  //stores document height
+      //description.meas.height = document.documentElement.clientHeight;  //stores document height
 
       description.addElements();
 
@@ -52,7 +52,7 @@ var description = {
 
       window.setTimeout(description.checkInteraction, 10000);  //timeout to call hide function after a specified time.
 
-      description.elem.holder.style.height = description.meas.height / 2 + "px";  //sets initial height of top div to half the screen size.
+      //description.elem.holder.style.height = description.meas.height / 2 + "px";  //sets initial height of top div to half the screen size.
 
       //Touch ANYWHERE within description will close it
       d3.select(description.elem.holder)  //D3, select description ('top') div
@@ -103,7 +103,7 @@ var description = {
     text.className = "text";
     close.className = "description-close";
 
-    title.innerHTML = donut.description.title;
+    title.innerHTML = donut.description.title + "<span class='description-arrow'>&#x25BC;</span>";
     text.innerHTML = donut.description.text;
     close.innerHTML = "&#215;";
 
@@ -111,6 +111,16 @@ var description = {
     holder.appendChild(text);
     holder.appendChild(close);
     document.body.appendChild(holder);
+
+    console.log(holder.clientHeight);
+    description.meas.height = holder.clientHeight + 30;
+    holder.style.height = description.meas.height + "px";
+
+    var titleHeight = title.clientHeight + (Math.round(title.clientHeight * .055));
+    console.log(titleHeight);
+    description.meas.hideHeight = titleHeight;
+    //console.log(document.documentElement.clientWidth)
+    //console.log(document.documentElement.clientHeight)
   },
 
 
@@ -137,21 +147,26 @@ var description = {
    *   are no longer visible, and moves the button to the top right area of the screen
    */
   hide: function(){
-    var directions = description.elem.holder.children[1];
-    directions.style.transition = "opacity .5s";
+    if (description.elem.arrow) {
+      setTimeout(function(){
+        description.elem.arrow.style.opacity = 1;
+      },500);
+    } else {
+      description.elem.arrow = document.getElementsByClassName("description-arrow")[0];
+      setTimeout(function(){
+        description.elem.arrow.style.opacity = 1;
+      },500);
+    }
 
-    description.elem.holder.style.height = "5%";
+    console.log(description.meas.hideHeight);
+    description.elem.holder.style.height = description.meas.hideHeight + "px";
     description.elem.holder.setAttribute("class", "hidden description-holder");
 
-    description.elem.close.innerHTML = "&#x25BC;";
-    description.elem.close.style.lineHeight = 3;
-    description.elem.close.style.fontSize = "150%";
+    description.elem.close.innerHTML = "&#215;";
+    description.elem.close.style.opacity = 0;
+
 
     description.elem.text.style.opacity = 0;
-    //description.elem.button.setAttribute("class", "hidden button description");
-    //description.elem.button.style.height = "25px";
-
-    //description.elem.buttonArrow.style.transform = "rotate(" + 90 + "deg )";
 
     description.hidden = true;
     description.interaction = true;
@@ -166,8 +181,10 @@ var description = {
    *   so they are visible, and moves the button to the lower middle area of the div
    */
   show: function(){
-    //var button = description.elem.button;
-    //var topDiv = description.elem.holder;
+
+    var arrow = document.getElementsByClassName("description-arrow")[0];
+    arrow.style.opacity = 0;
+
 
     if(donut.current.active){
       donut.leavePath(donut.current.d, donut.current.touched);
@@ -177,25 +194,16 @@ var description = {
       help.hide();
     }
 
-    //var directions = description.elem.holder.children[1];
-    //directions.style.transition = "opacity 2.5s";
-    //var title = topDiv.children[0];
 
-    description.elem.holder.style.height = description.meas.height / 2 + "px";
+    description.elem.holder.style.height = description.meas.height + "px";
     description.elem.holder.setAttribute("class", "description-holder");
 
     description.elem.close.innerHTML = "&#215;";
-    description.elem.close.style.lineHeight = "normal";
-    description.elem.close.style.fontSize = "300%";
+    setTimeout(function(){
+      description.elem.close.style.opacity = 1;
+    },800);
 
     description.elem.text.style.opacity = 1;
-
-    //description.elem.button.setAttribute("class", "button description");
-    //description.elem.button.style.height = buttons.measurements.buttonWidth;
-
-    //description.elem.buttonArrow.style.transform = "rotate(" + 270 + "deg )";
-
-    //directions.style.transition = "opacity 1s";
 
     description.hidden = false;
   }

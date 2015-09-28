@@ -1,3 +1,5 @@
+$button-background-color: #000;
+
 .help-text {
   background: rgba(255, 255, 255, .9);
   bottom: 0;
@@ -34,7 +36,7 @@
   li {
     margin-bottom: 15px;
         //float: left;
-    width: 100%;
+    width: 85%;
     //clear: left;
   }
 
@@ -51,4 +53,62 @@
 .help-title {
   padding-left: 15px;
   margin: 15px 0px 5px 0px;
+}
+
+
+//////////////////for the button//////////////////
+
+//copy of the button class from buttons.js (so that help.js and this scss could be used independently if needed)
+.button {
+  background-color: $button-background-color; //probably will be changed when using Olivia's buttons
+  border-radius: 100%;
+  bottom: 2.5%;
+  color: #fff;                          //will be changed when using Olivia's buttons
+  left: 8%;
+  padding: 2%;                    //will be changed when using Olivia's buttons
+  position: fixed;
+  width: 11%;
+  max-width: 50px;
+  z-index: 5;
+
+  &.help {
+    font-family: Avenir-Book;
+    font-size: 2.4em;
+    left: 77%; //position of help button at current width percentage
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  &#active {
+    background: rgba(0,0,0,.85); //background change on touch event
+  }
+}
+
+/**
+ * iPad sized or similar tablet
+ */
+@media screen
+and (min-device-width: 599px)
+and (-webkit-min-device-pixel-ratio: 2) {
+
+  div.button.help {
+    font-size: 3.5em;
+    line-height: 1.0;
+    left: calc(92% - 80px);
+  }
+}
+
+
+
+/**
+ * Fix for title margin for iPHone 6+ and similar width devices
+ */
+@media screen
+and (max-device-width: 415px)
+and (-webkit-min-device-pixel-ratio: 3) {
+
+  div.button.help {
+    font-size: 2.65em;
+    line-height: 1.2;
+  }
 }
