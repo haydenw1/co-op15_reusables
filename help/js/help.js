@@ -60,7 +60,7 @@ var help = {
         });
 
       //Touch ANYWHERE within help will close it
-      d3.select(help.elem.close)  //D3, select help ('top') div
+      d3.select(help.elem.closeHolder)  //D3, select help ('top') div
         .on("touchstart", function(){  //bind touch event
           //d3.event.stopPropagation();
           if( !help.hidden ){  //if help is showing
@@ -92,17 +92,22 @@ var help = {
    *   to many different visualization without editing the 'index.html' of each vis.
    */
   addElements: function(){
-    var div = document.createElement("div");
-    var p = document.createElement("p");
-    help.elem.helpDiv = div; //save reference to main div to be used later
-    help.elem.close = p; //save reference to 'help-close' <p> element to be used later
+    var helpText = document.createElement("div");
+    var closeHolder = document.createElement("div");
+    var close = document.createElement("p");
 
-    div.className = "help-text";
-    p.className = "help-close";
+    help.elem.helpDiv = helpText; //save reference to main div to be used later
+    help.elem.closeHolder = closeHolder; //save reference to close holder div that will listen for touch
+    help.elem.close = close; //save reference to 'help-close' <p> element to be used later
 
-    p.innerHTML = "&#215;";
-    div.appendChild(p);
-    document.body.appendChild(div);
+    helpText.className = "help-text";
+    closeHolder.className = "help-close-holder";
+    close.className = "help-close";
+
+    close.innerHTML = "&#215;";
+    closeHolder.appendChild(close);
+    helpText.appendChild(closeHolder);
+    document.body.appendChild(helpText);
   },
 
 
@@ -194,6 +199,16 @@ var help = {
     }
 
     help.hidden = true;
+    //d3.selectAll(".button").style("border","none");
+
+    help.elem.button.style.background = "#000";
+    help.elem.button.style.color = "#fff";
+
+    $( ".button.nav" ).find("rect, polygon").attr("fill", "#fff")
+    $( ".button.nav" ).find("line").attr("stroke", "#fff");
+    $( ".button.nav" ).css("background","#000");
+
+    $( ".help-close" ).stop(true).fadeOut();
   },
 
 
@@ -214,6 +229,17 @@ var help = {
     if (!description.hidden) {
       description.hide();
     }
+
+    //d3.selectAll(".button").style("border","2px solid white");
+
+    help.elem.button.style.background = "#fff";
+    help.elem.button.style.color = "#000";
+
+    $( ".button.nav" ).find("rect, polygon").attr("fill", "#000")
+    $( ".button.nav" ).find("line").attr("stroke", "#000");
+    $( ".button.nav" ).css("background","#fff");
+
+    $( ".help-close" ).stop(true).fadeIn();
 
     help.elem.helpDiv.style.height = "75%";
 

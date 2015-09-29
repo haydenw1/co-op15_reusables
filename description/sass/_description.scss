@@ -58,6 +58,14 @@ $directions-title-color: #fff;
   }
 }
 
+.description-close-holder {
+  position: absolute;
+  right: 0px;
+  bottom:0px;
+      width: 15vw;
+    height: 9vh;
+}
+
 .description-close {
   bottom: 0px;
   font-size: 10vw;
@@ -67,7 +75,7 @@ $directions-title-color: #fff;
   right: 0px;
   //bottom: 3vw;
   text-align: center;
-  transition: opacity .25s;
+  //transition: opacity .25s;
   //width: 60px;
 
   &:active {
@@ -77,8 +85,21 @@ $directions-title-color: #fff;
 
 .description-arrow {
   float: right;
-  opacity: 0;
+  display: none;
   position: relative;
   top: 1px;
-  transition: opacity .25s;
+  //transition: opacity .25s;
+}
+
+@media screen and (min-width: 599px) {
+  .description-holder {
+
+    .text {
+      font-size: 3.5vw;
+    }
+
+    .title {
+      font-size: 5vw;
+    }
+  }
 }

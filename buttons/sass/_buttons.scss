@@ -3,11 +3,12 @@
     src: url("../fonts/AvenirLTStd-Book.otf");
   }*/
 
-$button-background-color: #000;
-
+$background-color: #000;
+//$border-color: #fff;
 .button {
-  background-color: $button-background-color; //probably will be changed when using Olivia's buttons
+  background-color: $background-color; //probably will be changed when using Olivia's buttons
   border-radius: 100%;
+  //border: 2px solid $border-color;
   bottom: 2.5%;
   color: #fff;                          //will be changed when using Olivia's buttons
   left: 8%;

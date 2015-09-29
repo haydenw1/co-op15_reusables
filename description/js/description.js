@@ -62,7 +62,7 @@ var description = {
           }
         });
 
-      d3.select(description.elem.close)  //D3, select hide/show button
+      d3.select(description.elem.closeTap)  //D3, select hide/show button
         .on("touchstart", function(){  //bind touch event
           if(description.hidden){  //if description is currently hidden
             description.show();  //show the description
@@ -90,17 +90,20 @@ var description = {
     var holder = document.createElement("div");
     var title = document.createElement("h1");
     var text = document.createElement("p");
+    var closeTap = document.createElement("div");
     var close = document.createElement("p");
 
     console.log(description.elem);
     description.elem.holder = holder; //save reference to main div to be used later
     description.elem.title = title; //save reference to title <h1> element to be used later
     description.elem.text = text; //save reference to 'help-close' <p> element to be used later
+    description.elem.closeTap = closeTap;
     description.elem.close = close; //save reference to 'help-close' <p> element to be used later
 
     holder.className = "description-holder";
     title.className = "title";
     text.className = "text";
+    closeTap.className = "description-close-holder";
     close.className = "description-close";
 
     title.innerHTML = donut.description.title + "<span class='description-arrow'>&#x25BC;</span>";
@@ -109,7 +112,8 @@ var description = {
 
     holder.appendChild(title);
     holder.appendChild(text);
-    holder.appendChild(close);
+    closeTap.appendChild(close);
+    holder.appendChild(closeTap);
     document.body.appendChild(holder);
 
     console.log(holder.clientHeight);
@@ -147,23 +151,29 @@ var description = {
    *   are no longer visible, and moves the button to the top right area of the screen
    */
   hide: function(){
-    if (description.elem.arrow) {
-      setTimeout(function(){
-        description.elem.arrow.style.opacity = 1;
-      },500);
-    } else {
-      description.elem.arrow = document.getElementsByClassName("description-arrow")[0];
-      setTimeout(function(){
-        description.elem.arrow.style.opacity = 1;
-      },500);
-    }
+    console.log("HIDEEE!!!");
+    //if (description.elem.arrow) {
+      //setTimeout(function(){
+      //  description.elem.arrow.style.opacity = 1;
+      //},500);
+      $( ".description-arrow" ).stop(true).fadeIn();
+      $( ".description-close" ).stop(true).fadeOut();
+      //console.log(description.elem.arrow);
+    //} else {
+    //  description.elem.arrow = $( ".description-arrow" );
+    //  console.log(description.elem.arrow);
+    //  //setTimeout(function(){
+    //  //  description.elem.arrow.style.opacity = 1;
+    //  //},500);
+    //  description.elem.arrow.delay(500).stop(true).fadeIn();
+    //}
 
     console.log(description.meas.hideHeight);
     description.elem.holder.style.height = description.meas.hideHeight + "px";
     description.elem.holder.setAttribute("class", "hidden description-holder");
 
-    description.elem.close.innerHTML = "&#215;";
-    description.elem.close.style.opacity = 0;
+    //description.elem.close.innerHTML = "&#215;";
+    //description.elem.close.style.opacity = 0;
 
 
     description.elem.text.style.opacity = 0;
@@ -182,8 +192,11 @@ var description = {
    */
   show: function(){
 
-    var arrow = document.getElementsByClassName("description-arrow")[0];
-    arrow.style.opacity = 0;
+    console.log("SHOWWW");
+    //var arrow = document.getElementsByClassName("description-arrow")[0];
+    $( ".description-arrow" ).stop(true).fadeOut();
+    $( ".description-close" ).stop(true).fadeIn();
+    //arrow.style.opacity = 0;
 
 
     if(donut.current.active){
@@ -198,10 +211,10 @@ var description = {
     description.elem.holder.style.height = description.meas.height + "px";
     description.elem.holder.setAttribute("class", "description-holder");
 
-    description.elem.close.innerHTML = "&#215;";
-    setTimeout(function(){
-      description.elem.close.style.opacity = 1;
-    },800);
+    //description.elem.close.innerHTML = "&#215;";
+    //setTimeout(function(){
+    //  description.elem.close.style.opacity = 1;
+    //},800);
 
     description.elem.text.style.opacity = 1;
 
